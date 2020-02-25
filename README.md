@@ -1,3 +1,3 @@
 # todos-project
 
-Just first exp on Node
+For database platform used Mongodb Atlas
