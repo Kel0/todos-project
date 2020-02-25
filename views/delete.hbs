@@ -1,0 +1,40 @@
+<h2>Delete page</h2>
+{{#if todo_array.length}}
+<ul>
+    {{#each todo_array}}
+        <li class="todo" id="todo_{{ this._id }}">
+
+            <label>
+                {{#if this.completed}}
+                    <input type="checkbox" checked name="completed" id="completed_{{ this._id }}" disabled>
+                    <span class="completed">{{this.title}}</span>
+                {{else }}
+                    <input type="checkbox" name="completed" id="completed_{{ this._id }}" disabled>
+                    <span>{{this.title}}</span>
+                {{/if }}
+
+                <button class="btn btn-small" value="{{ this._id }}" onclick="deleteTodo(this.value);">Delete</button>                
+            </label>
+
+        </li>
+    {{/each }}
+</ul>
+{{else }}
+    <p>No Todos!</p>
+{{/if }}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+function deleteTodo(value) {
+    var checkbox = document.getElementById(`completed_${value}`);
+    
+    $.ajax({
+        type: "POST",
+        url: "/delete",
+        data: {"todo_id": value, "completed": checkbox.checked},
+        success: function (data) {
+            document.getElementById(`todo_${value}`).remove();
+        }
+    });
+}
+</script>

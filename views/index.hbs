@@ -1,0 +1,41 @@
+<h2>Todo Page</h2>
+{{#if todo_array.length}}
+<ul>
+    {{#each todo_array}}
+        <li class="todo">
+            
+            {{!-- <form action="/complete" method="POST"> --}}
+                <label>
+                    {{#if this.completed}}
+                        <input type="checkbox" checked name="completed" id="completed_{{ this._id }}">
+                        <span class="completed">{{this.title}}</span>
+                    {{else }}
+                        <input type="checkbox" name="completed" id="completed_{{ this._id }}">
+                        <span>{{this.title}}</span>
+                    {{/if }}
+
+                    <button class="btn btn-small" value="{{ this._id }}" onclick="saveTodo(this.value);">Save</button>                
+                </label>
+            {{!-- </form> --}}
+        </li>
+    {{/each }}
+</ul>
+{{else }}
+    <p>No Todos!</p>
+{{/if }}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+function saveTodo(value) {
+    var checkbox = document.getElementById(`completed_${value}`);
+    
+    $.ajax({
+        type: "POST",
+        url: "/complete",
+        data: {"todo_id": value, "completed": checkbox.checked},
+        success: function (data) {
+            console.log(data);
+        }
+    });
+}
+</script>

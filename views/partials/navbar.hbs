@@ -1,0 +1,26 @@
+<nav class="blue darken-4">
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo right">Todos</a>
+        <ul id="nav-mobile" class="left hide-on-med-and-down">
+            
+            {{#if isHome }}
+                <li class="active"><a href="/">Home</a></li>
+            {{else }}
+                <li><a href="/">Home</a></li>
+            {{/if }}
+
+            {{#if isCreate }}
+                <li class="active"><a href="/create">Create</a></li>
+            {{else }}
+                <li><a href="/create">Create</a></li>
+            {{/if }}
+
+            {{#if isDelete }}
+                <li class="active"><a href="/delete">Delete</a></li>
+            {{else }}
+                <li><a href="/delete">Delete</a></li>
+            {{/if }}
+
+        </ul>
+    </div>
+</nav>
